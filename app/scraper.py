@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 from datetime import datetime
 
 def get_diretta_results():
@@ -12,7 +13,13 @@ def get_diretta_results():
     }
 
     # API Key corretta
-    API_KEY = "68b860d0d90846788fbd0c2d142ec8aa"
+    #API_KEY = "68b860d0d90846788fbd0c2d142ec8aa"
+    
+    API_KEY = os.environ.get('FOOTBALL_API_KEY')
+
+    if not API_KEY:
+        print("ERRORE: La chiave API non è stata trovata nelle variabili d'ambiente!")
+
     url = "https://api.football-data.org/v4/competitions/SA/matches"
     headers = {'X-Auth-Token': API_KEY}
 
